@@ -1,6 +1,6 @@
 /* GET home page */
 module.exports.homelist = function(req, res){
-  res.render('index', { title: 'Home' });
+  res.render('book-list', { title: 'Home' });
 };
 
 /* GET Book info page */
