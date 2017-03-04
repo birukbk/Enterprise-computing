@@ -14,14 +14,12 @@ block content
         each book in books
           .col-xs-12.list-group-item
             h4 
+               +outputRating(book.rating)
+            h4
               a(href="/books")= book.title 
-
               small &nbsp;
-
-
-
-                 +outputRating(book.rating)
               span.badge.pull-right.badge-default= book.comment
-            p.address= book.author
+            p.author= book.author      
     .col-xs-12.col-sm-4 
+
       p.lead= sidebar
