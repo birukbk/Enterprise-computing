@@ -10,5 +10,5 @@ module.exports.bookInfo = function(req, res){
 
 /* GET Add review page */
 module.exports.addReview = function(req, res){
-  res.render('index', { title: 'Add Review' });
+  res.render('book-review-form', { title: 'Add Review' });
 };
