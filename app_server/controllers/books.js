@@ -5,7 +5,7 @@ module.exports.homelist = function(req, res){
 
 /* GET Book info page */
 module.exports.bookInfo = function(req, res){
-  res.render('index', { title: 'Book Info' });
+  res.render('book-info', { title: 'Book Info' });
 };
 
 /* GET Add review page */
