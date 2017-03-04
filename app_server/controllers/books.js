@@ -1,6 +1,13 @@
 /* GET home page */
 module.exports.homelist = function(req, res){
-  res.render('book-list', { title: 'Home' });
+  res.render('book-list', { 
+  	title: 'Welcome to your favorite books!',
+  	pageHeader:{
+  		title: 'BookFace',
+  		strapline: "Welcome to your favorite books!"
+
+  	} 
+  });
 };
 
 /* GET Book info page */
