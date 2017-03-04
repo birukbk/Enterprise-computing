@@ -1,0 +1,27 @@
+extends layout
+
+include _includes/sharedHTMLfunctions
+
+block content
+  #banner.page-header
+    .row
+      .col-lg-6
+        h1= pageHeader.title
+         small &nbsp;#{pageHeader.strapline}
+  .row
+    .col-xs-12.col-sm-8
+      .row.list-group
+        each book in books
+          .col-xs-12.list-group-item
+            h4 
+              a(href="/books")= book.title 
+
+              small &nbsp;
+
+
+
+                 +outputRating(book.rating)
+              span.badge.pull-right.badge-default= book.comment
+            p.address= book.author
+    .col-xs-12.col-sm-4 
+      p.lead= sidebar
