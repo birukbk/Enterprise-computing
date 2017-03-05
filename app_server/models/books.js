@@ -1,2 +1,33 @@
 var mongoose = require('mongoose');
-var bookschema = new mongoose.schema({});
+var reviewSchema = new mongoose.Schema({
+    author: String,
+    rating: {
+        type: Number,
+        required: true,
+        min: 0,
+        max: 5
+    },
+    reviewText: String,
+    createdOn: {
+        type: Date,
+        "default": Date.now
+    }
+});
+
+var bookSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    bookAutor: {
+    	type: String,
+    	required: true
+    },
+    rating: {
+        type: Number,
+        "default": 0,
+        min: 0,
+        max: 5
+    }
+});
+mongoose.model('Book', bookSchema);

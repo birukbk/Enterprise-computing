@@ -9,27 +9,27 @@ module.exports.homelist = function(req, res) {
         sidebar: "Looking for something to read? BookFace helps you find books to read easly!",
         books: [{
             title: 'Zero to One: Notes on Startups, or How to Build the Future',
-            author: 'Peter Thiel',
+            bookAuthor: 'Peter Thiel',
             rating: 3, 
             comment: '100'
         }, {
             title: 'Steve Jobs',
-            author: 'Walter Isaacson',
+            bookAuthor: 'Walter Isaacson',
             rating: 4,
             comment: '200'
         }, {
             title: 'David and Goliath: Underdogs, Misfits, and the Art of Battling Giants',
-            author: 'Malcolm Gladwell',
+            bookAuthor: 'Malcolm Gladwell',
             rating: 2,
             comment: '250'
         }, {
             title: '1984',
-            author: 'George Orwell',
+            bookAuthor: 'George Orwell',
             rating: 4,
             comment: '200'
         }, {
             title: 'The Paradox of Choice: Why More Is Less',
-            author: 'Barry Schwartz',
+            bookAuthor: 'Barry Schwartz',
             rating: 4,
             comment: '200'
         }]
