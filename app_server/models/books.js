@@ -28,7 +28,7 @@ var bookSchema = new mongoose.Schema({
         "default": 0,
         min: 0,
         max: 5
-    }
+    },
     reviews: [reviewSchema]
 });
 mongoose.model('Book', bookSchema);
