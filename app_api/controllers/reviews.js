@@ -103,3 +103,54 @@ var doAddReview = function(req, res, book) {
     });
   }
 };
+
+
+module.exports.reviewsUpdateOne = function(req, res) {
+  if (!req.params.bookid || !req.params.reviewid) {
+    sendJSONresponse(res, 404, {
+      "message": "Not found, bookid and reviewid are both required"
+    });
+    return;
+  }
+  Loc
+    .findById(req.params.bookid)
+    .select('reviews')
+    .exec(
+      function(err, book) {
+        var thisReview;
+        if (!book) {
+          sendJSONresponse(res, 404, {
+            "message": "bookid not found"
+          });
+          return;
+        } else if (err) {
+          sendJSONresponse(res, 400, err);
+          return;
+        }
+        if (book.reviews && book.reviews.length > 0) {
+          thisReview = book.reviews.id(req.params.reviewid);
+          if (!thisReview) {
+            sendJSONresponse(res, 404, {
+              "message": "reviewid not found"
+            });
+          } else {
+            thisReview.author = req.body.author;
+            thisReview.rating = req.body.rating;
+            thisReview.reviewText = req.body.reviewText;
+            book.save(function(err, book) {
+              if (err) {
+                sendJSONresponse(res, 404, err);
+              } else {
+                updateAverageRating(book._id);
+                sendJSONresponse(res, 200, thisReview);
+              }
+            });
+          }
+        } else {
+          sendJSONresponse(res, 404, {
+            "message": "No review to update"
+          });
+        }
+      }
+  );
+};
