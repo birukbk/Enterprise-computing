@@ -5,14 +5,14 @@ var ctrlReviews = require('../controllers/reviews');
 
 
 //router.post('/books', ctrlbooks.booksCreate);
- router.get('/books/:locationid', ctrlbooks.booksReadOne);
-// router.put('/books/:locationid', ctrlbooks.booksUpdateOne);
-// router.delete('/books/:locationid', ctrlbooks.booksDeleteOne);
+ router.get('/books/:bookid', ctrlbooks.booksReadOne);
+// router.put('/books/:bookid', ctrlbooks.booksUpdateOne);
+// router.delete('/books/:bookid', ctrlbooks.booksDeleteOne);
 
 // // reviews
- //router.post('/books/:locationid/reviews', ctrlReviews.reviewsCreate);
- router.get('/books/:locationid/reviews/:reviewid', ctrlReviews.reviewsReadOne);
-// router.put('/books/:locationid/reviews/:reviewid', ctrlReviews.reviewsUpdateOne);
-// router.delete('/books/:locationid/reviews/:reviewid', ctrlReviews.reviewsDeleteOne);
+ //router.post('/books/:bookid/reviews', ctrlReviews.reviewsCreate);
+ router.get('/books/:bookid/reviews/:reviewid', ctrlReviews.reviewsReadOne);
+// router.put('/books/:bookid/reviews/:reviewid', ctrlReviews.reviewsUpdateOne);
+// router.delete('/books/:bookid/reviews/:reviewid', ctrlReviews.reviewsDeleteOne);
 
 module.exports = router;
