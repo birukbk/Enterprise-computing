@@ -6,7 +6,7 @@ var ctrlReviews = require('../controllers/reviews');
 
  router.post('/books', ctrlbooks.booksCreate);
  router.get('/books/:bookid', ctrlbooks.booksReadOne);
-// router.put('/books/:bookid', ctrlbooks.booksUpdateOne);
+ //router.put('/books/:bookid', ctrlbooks.booksUpdateOne);
 // router.delete('/books/:bookid', ctrlbooks.booksDeleteOne);
 
 // // reviews
