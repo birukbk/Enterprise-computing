@@ -38,9 +38,9 @@ module.exports.booksReadOne = function(req, res) {
 module.exports.booksCreate = function(req, res) {
   console.log(req.body);
   Loc.create({
-    title: req.body.title,
-    bookAutor: req.body.bookAutor,
-    rating : req.body.rating
+    title: req.query.title,
+    bookAuthor: req.query.bookAuthor,
+    rating : req.query.rating
   }, function(err, book) {
     if (err) {
       console.log(err);

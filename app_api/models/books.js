@@ -19,7 +19,7 @@ var bookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    bookAutor: {
+    bookAuthor: {
     	type: String,
     	required: true
     },
