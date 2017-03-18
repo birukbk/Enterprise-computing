@@ -7,7 +7,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 
-var renderHomepage = function(req, res) {
+
+var renderHomepage = function(req, res, responseBody) {
     res.render('books-list', {
         title: 'Welcome to your favorite books',
         pageHeader: {
@@ -15,56 +16,34 @@ var renderHomepage = function(req, res) {
             strapline: 'Welcome to your favorite books'
         },
         sidebar: "Looking for something to read? BookFace helps you find books to read easly!",
-        books: [{
-            title: 'Zero to One: Notes on Startups, or How to Build the Future',
-            bookAuthor: 'Peter Thiel',
-            rating: 3, 
-            comment: '100'
-        }, {
-            title: 'Steve Jobs',
-            bookAuthor: 'Walter Isaacson',
-            rating: 4,
-            comment: '200'
-        }, {
-            title: 'David and Goliath: Underdogs, Misfits, and the Art of Battling Giants',
-            bookAuthor: 'Malcolm Gladwell',
-            rating: 2,
-            comment: '250'
-        }, {
-            title: '1984',
-            bookAuthor: 'George Orwell',
-            rating: 4,
-            comment: '200'
-        }, {
-            title: 'The Paradox of Choice: Why More Is Less',
-            bookAuthor: 'Barry Schwartz',
-            rating: 4,
-            comment: '200'
-        }]
+        books: responseBody
     });
 };
 
-
-
+/* GET home page */
 module.exports.homelist = function(req, res){
     var requestOptions,path;
-    path = 'api/books';
+    path = '/api/books';
     requestOptions =  {
         url : apiOptions.server + path,
         method: "GET",
-        json :{},
-        qs :{}
+        json :{}
+      
 };
 request (
-    requestOptions, function(err,response,body) {
-         renderHomepage(req,res);
+    requestOptions, 
+    function(err,response,body) {
+      if(err){
+        console.log(err);
+      } else if (response.statusCode === 200){
+        console.log(body);
+      } else {
+        console.log(response.statusCode);
+      }
+         renderHomepage(req,res,body);
     }
     );
- 
 };
-
-
-
 
 
 
