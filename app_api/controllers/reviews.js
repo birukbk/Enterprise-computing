@@ -188,3 +188,50 @@ module.exports.reviewsUpdateOne = function(req, res) {
       }
   );
 };
+
+// app.delete('/api/books/:bookid/reviews/:reviewid'
+module.exports.reviewsDeleteOne = function(req, res) {
+  if (!req.params.bookid || !req.params.reviewid) {
+    sendJSONresponse(res, 404, {
+      "message": "Not found, bookid and reviewid are both required"
+    });
+    return;
+  }
+  Loc
+    .findById(req.params.bookid)
+    .select('reviews')
+    .exec(
+      function(err, book) {
+        if (!book) {
+          sendJSONresponse(res, 404, {
+            "message": "bookid not found"
+          });
+          return;
+        } else if (err) {
+          sendJSONresponse(res, 400, err);
+          return;
+        }
+        if (book.reviews && book.reviews.length > 0) {
+          if (!book.reviews.id(req.params.reviewid)) {
+            sendJSONresponse(res, 404, {
+              "message": "reviewid not found"
+            });
+          } else {
+            book.reviews.id(req.params.reviewid).remove();
+            book.save(function(err) {
+              if (err) {
+                sendJSONresponse(res, 404, err);
+              } else {
+                updateAverageRating(book._id);
+                sendJSONresponse(res, 204, null);
+              }
+            });
+          }
+        } else {
+          sendJSONresponse(res, 404, {
+            "message": "No review to delete"
+          });
+        }
+      }
+  );
+};
