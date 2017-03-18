@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Loc = mongoose.model('Book');
+var Bok = mongoose.model('Book');
 var sendJSONresponse = function(res,status,content){
 	res.status(status);
 	res.json(content);
@@ -12,7 +12,7 @@ var sendJSONresponse = function(res,status,content){
 module.exports.reviewsReadOne = function(req, res) {
   console.log("Getting single review");
   if (req.params && req.params.bookid && req.params.reviewid) {
-    Loc
+    Bok
       .findById(req.params.bookid)
       .select('title reviews')
       .exec(
@@ -62,7 +62,7 @@ module.exports.reviewsReadOne = function(req, res) {
 /* /api/books/:bookid/reviews */
 module.exports.reviewsCreate = function(req, res) {
   if (req.params.bookid) {
-    Loc
+    Bok
       .findById(req.params.bookid)
       .select('reviews')
       .exec(
@@ -106,7 +106,7 @@ var doAddReview = function(req, res, book) {
 
 var updateAverageRating = function(bookid) {
   console.log("Update rating average for", bookid);
-  Loc
+  Bok
     .findById(bookid)
     .select('reviews')
     .exec(
@@ -146,7 +146,7 @@ module.exports.reviewsUpdateOne = function(req, res) {
     });
     return;
   }
-  Loc
+  Bok
     .findById(req.params.bookid)
     .select('reviews')
     .exec(
@@ -197,7 +197,7 @@ module.exports.reviewsDeleteOne = function(req, res) {
     });
     return;
   }
-  Loc
+  Bok
     .findById(req.params.bookid)
     .select('reviews')
     .exec(

@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Loc = mongoose.model('Book');
+var Bok = mongoose.model('Book');
 var sendJSONresponse = function(res, status, content){
 	res.status(status);
 	res.json(content);
@@ -9,7 +9,7 @@ var sendJSONresponse = function(res, status, content){
 module.exports.booksReadOne = function(req, res) {
   console.log('Finding book details', req.params);
   if (req.params && req.params.bookid) {
-    Loc
+    Bok
       .findById(req.params.bookid)
       .exec(function(err, book) {
         if (!book) {
@@ -37,7 +37,7 @@ module.exports.booksReadOne = function(req, res) {
 /* /api/books */
 module.exports.booksCreate = function(req, res) {
   console.log(req.body);
-  Loc.create({
+  Bok.create({
     title: req.query.title,
     bookAuthor: req.query.bookAuthor,
     rating : req.query.rating
@@ -62,7 +62,7 @@ module.exports.booksUpdateOne = function(req, res) {
     });
     return;
   }
-  Loc
+  Bok
     .findById(req.params.bookid)
     .select('-reviews -rating')
     .exec(
@@ -94,7 +94,7 @@ module.exports.booksUpdateOne = function(req, res) {
 module.exports.booksDeleteOne = function(req, res) {
   var bookid = req.params.bookid;
   if (bookid) {
-    Loc
+    Bok
       .findByIdAndRemove(bookid)
       .exec(
         function(err, book) {
