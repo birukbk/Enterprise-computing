@@ -14,7 +14,7 @@ module.exports.reviewsReadOne = function(req, res) {
   if (req.params && req.params.bookid && req.params.reviewid) {
     Loc
       .findById(req.params.bookid)
-      .select('name reviews')
+      .select('title reviews')
       .exec(
         function(err, book) {
           console.log(book);
@@ -34,10 +34,10 @@ module.exports.reviewsReadOne = function(req, res) {
               sendJSONresponse(res, 404, {
                 "message": "reviewid not found"
               });
-            } else {
+            } else {  
               response = {
                 book: {
-                  name: book.name,
+                  title: book.title,
                   id: req.params.bookid
                 },
                 review: review
@@ -87,9 +87,9 @@ var doAddReview = function(req, res, book) {
     sendJSONresponse(res, 404, "bookid not found");
   } else {
     book.reviews.push({
-      author: req.body.author,
-      rating: req.body.rating,
-      reviewText: req.body.reviewText
+      author: req.query.author,
+      rating: req.query.rating,
+      reviewText: req.query.reviewText
     });
     book.save(function(err, book) {
       var thisReview;
@@ -104,6 +104,38 @@ var doAddReview = function(req, res, book) {
   }
 };
 
+var updateAverageRating = function(bookid) {
+  console.log("Update rating average for", bookid);
+  Loc
+    .findById(bookid)
+    .select('reviews')
+    .exec(
+      function(err, book) {
+        if (!err) {
+          doSetAverageRating(book);
+        }
+      });
+};
+
+var doSetAverageRating = function(book) {
+  var i, reviewCount, ratingAverage, ratingTotal;
+  if (book.reviews && book.reviews.length > 0) {
+    reviewCount = book.reviews.length;
+    ratingTotal = 0;
+    for (i = 0; i < reviewCount; i++) {
+      ratingTotal = ratingTotal + book.reviews[i].rating;
+    }
+    ratingAverage = parseInt(ratingTotal / reviewCount, 10);
+    book.rating = ratingAverage;
+    book.save(function(err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Average rating updated to", ratingAverage);
+      }
+    });
+  }
+};
 
 module.exports.reviewsUpdateOne = function(req, res) {
   if (!req.params.bookid || !req.params.reviewid) {

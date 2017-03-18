@@ -10,8 +10,8 @@ var ctrlReviews = require('../controllers/reviews');
 // router.delete('/books/:bookid', ctrlbooks.booksDeleteOne);
 
 // // reviews
- router.post('/books/:bookid/reviews', ctrlReviews.reviewsCreate);
- router.get('/books/:bookid/reviews/:reviewid', ctrlReviews.reviewsReadOne);
+router.post('/books/:bookid/reviews', ctrlReviews.reviewsCreate);
+router.get('/books/:bookid/reviews/:reviewid', ctrlReviews.reviewsReadOne);
 router.put('/books/:bookid/reviews/:reviewid', ctrlReviews.reviewsUpdateOne);
 // router.delete('/books/:bookid/reviews/:reviewid', ctrlReviews.reviewsDeleteOne);
 
