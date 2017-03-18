@@ -137,6 +137,8 @@ var doSetAverageRating = function(book) {
   }
 };
 
+
+/* PUT /api/books/:bookid/reviews/reviewid */
 module.exports.reviewsUpdateOne = function(req, res) {
   if (!req.params.bookid || !req.params.reviewid) {
     sendJSONresponse(res, 404, {
@@ -166,9 +168,9 @@ module.exports.reviewsUpdateOne = function(req, res) {
               "message": "reviewid not found"
             });
           } else {
-            thisReview.author = req.body.author;
-            thisReview.rating = req.body.rating;
-            thisReview.reviewText = req.body.reviewText;
+            thisReview.author = req.query.author;
+            thisReview.rating = req.query.rating;
+            thisReview.reviewText = req.query.reviewText;
             book.save(function(err, book) {
               if (err) {
                 sendJSONresponse(res, 404, err);
