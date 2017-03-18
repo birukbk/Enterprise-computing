@@ -1,4 +1,11 @@
 /* GET home page */
+var request = require('request');
+var apiOptions = {
+  server : "http://localhost:3000"
+};
+if (process.env.NODE_ENV === 'production') {
+  apiOptions.server = "https://hidden-hollows-18954.herokuapp.com";
+}
 module.exports.homelist = function(req, res) {
     res.render('books-list', {
         title: 'Welcome to your favorite books',
