@@ -4,10 +4,10 @@ var ctrlbooks = require('../controllers/books');
 var ctrlReviews = require('../controllers/reviews');
 
 
- router.post('/books', ctrlbooks.booksCreate);
- router.get('/books/:bookid', ctrlbooks.booksReadOne);
- router.put('/books/:bookid', ctrlbooks.booksUpdateOne);
-// router.delete('/books/:bookid', ctrlbooks.booksDeleteOne);
+router.post('/books', ctrlbooks.booksCreate);
+router.get('/books/:bookid', ctrlbooks.booksReadOne);
+router.put('/books/:bookid', ctrlbooks.booksUpdateOne);
+router.delete('/books/:bookid', ctrlbooks.booksDeleteOne);
 
 // // reviews
 router.post('/books/:bookid/reviews', ctrlReviews.reviewsCreate);

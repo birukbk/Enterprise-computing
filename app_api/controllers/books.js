@@ -88,3 +88,28 @@ module.exports.booksUpdateOne = function(req, res) {
       }
   );
 };
+
+
+/* DELETE /api/books/:bookid */
+module.exports.booksDeleteOne = function(req, res) {
+  var bookid = req.params.bookid;
+  if (bookid) {
+    Loc
+      .findByIdAndRemove(bookid)
+      .exec(
+        function(err, book) {
+          if (err) {
+            console.log(err);
+            sendJSONresponse(res, 404, err);
+            return;
+          }
+          console.log("book id " + bookid + " deleted");
+          sendJSONresponse(res, 204, null);
+        }
+    );
+  } else {
+    sendJSONresponse(res, 404, {
+      "message": "No bookid"
+    });
+  }
+};
