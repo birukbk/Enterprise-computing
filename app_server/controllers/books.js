@@ -1,4 +1,3 @@
-/* GET home page */
 var request = require('request');
 var apiOptions = {
   server : "http://localhost:3000"
@@ -6,7 +5,9 @@ var apiOptions = {
 if (process.env.NODE_ENV === 'production') {
   apiOptions.server = "https://hidden-hollows-18954.herokuapp.com";
 }
-module.exports.homelist = function(req, res) {
+
+
+var renderHomepage = function(req, res) {
     res.render('books-list', {
         title: 'Welcome to your favorite books',
         pageHeader: {
@@ -42,6 +43,31 @@ module.exports.homelist = function(req, res) {
         }]
     });
 };
+
+
+
+module.exports.homelist = function(req, res){
+    var requestOptions,path;
+    path = 'api/books';
+    requestOptions =  {
+        url : apiOptions.server + path,
+        method: "GET",
+        json :{},
+        qs :{}
+};
+request (
+    requestOptions, function(err,response,body) {
+         renderHomepage(req,res);
+    }
+    );
+ 
+};
+
+
+
+
+
+
 /* GET Book info page */
 module.exports.bookInfo = function(req, res){
   res.render('book-info', { title: 'Book Info' });
