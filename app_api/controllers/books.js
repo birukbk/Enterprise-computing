@@ -5,6 +5,8 @@ var sendJSONresponse = function(res, status, content){
 	res.json(content);
 };
 
+
+
 /* GET a book by the id */
 module.exports.booksReadOne = function(req, res) {
   console.log('Finding book details', req.params);
@@ -33,6 +35,35 @@ module.exports.booksReadOne = function(req, res) {
   }
 };
 
+/* GET list of books */
+module.exports.bookListByAuther = function(req, res) {
+  console.log(req.body);
+  Bok.find()
+    .select('bookAuthor title rating')
+    .exec(function(err, book) {
+    if (err) {
+      console.log(err);
+      sendJSONresponse(res, 400, err);
+    } else {
+      console.log(book);
+      sendJSONresponse(res, 201, book);
+    }
+  });
+};
+
+var buildLBookList = function(req, res, results, stats) {
+  var books = [];
+  results.forEach(function(doc) {
+    books.push({
+      bookAuthor: doc.obj.bookAuthor,
+      title: doc.obj.title,
+      rating: doc.obj.rating,
+      _id: doc.obj._id
+    });
+  });
+  return books;
+};
+
 /* POST a new book */
 /* /api/books */
 module.exports.booksCreate = function(req, res) {
@@ -51,8 +82,6 @@ module.exports.booksCreate = function(req, res) {
     }
   });
 };
-
-
 
 /* PUT /api/books/:bookid */
 module.exports.booksUpdateOne = function(req, res) {
