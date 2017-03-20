@@ -87,9 +87,9 @@ var doAddReview = function(req, res, book) {
     sendJSONresponse(res, 404, "bookid not found");
   } else {
     book.reviews.push({
-      author: req.query.author,
-      rating: req.query.rating,
-      reviewText: req.query.reviewText
+      author: req.body.author,
+      rating: req.body.rating,
+      reviewText: req.body.reviewText
     });
     book.save(function(err, book) {
       var thisReview;
@@ -168,9 +168,9 @@ module.exports.reviewsUpdateOne = function(req, res) {
               "message": "reviewid not found"
             });
           } else {
-            thisReview.author = req.query.author;
-            thisReview.rating = req.query.rating;
-            thisReview.reviewText = req.query.reviewText;
+            thisReview.author = req.body.author;
+            thisReview.rating = req.body.rating;
+            thisReview.reviewText = req.body.reviewText;
             book.save(function(err, book) {
               if (err) {
                 sendJSONresponse(res, 404, err);

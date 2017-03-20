@@ -38,9 +38,9 @@ module.exports.booksReadOne = function(req, res) {
 module.exports.booksCreate = function(req, res) {
   console.log(req.body);
   Bok.create({
-    title: req.query.title,
-    bookAuthor: req.query.bookAuthor,
-    rating : req.query.rating
+    title: req.body.title,
+    bookAuthor: req.body.bookAuthor,
+    rating : req.body.rating
   }, function(err, book) {
     if (err) {
       console.log(err);
@@ -76,8 +76,8 @@ module.exports.booksUpdateOne = function(req, res) {
           sendJSONresponse(res, 400, err);
           return;
         }
-        book.title = req.query.title;
-        book.bookAuthor = req.query.bookAuthor;
+        book.title = req.body.title;
+        book.bookAuthor = req.body.bookAuthor;
         book.save(function(err, book) {
           if (err) {
             sendJSONresponse(res, 404, err);
