@@ -16,7 +16,7 @@ block content
             h4 
                +outputRating(book.rating)
             h4
-              a(href="/books")= book.title 
+              a(href="/books/#{book._id}")= book.title 
               small &nbsp;
               span.badge.pull-right.badge-default= book.comment
             p.bookAuthor= book.bookAuthor      
