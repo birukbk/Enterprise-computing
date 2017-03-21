@@ -58,15 +58,15 @@ var getbookInfo = function (req, res, callback) {
   );
 };
 
-var renderDetailPage = function (req, res, locDetail) {
+var renderDetailPage = function (req, res, bookInfo) {
   res.render('book-info', {
-    title: locDetail.name,
-    pageHeader: {title: locDetail.name},
+    title: bookInfo.title,
+    pageHeader: {title: bookInfo.title},
     sidebar: {
       context: 'All your favorite books in one place.',
       callToAction: 'If you\'ve read this book and you like it - or if you don\'t - please leave a review to help other people just like you.'
     },
-    book: locDetail
+    book: bookInfo
   });
 };
 
@@ -77,10 +77,10 @@ module.exports.bookInfo = function(req, res){
   });
 };
 
-var renderReviewForm = function (req, res, locDetail) {
+var renderReviewForm = function (req, res, bookInfo) {
   res.render('book-review-form', {
-    title: 'Review ' + locDetail.name + ' on Loc8r',
-    pageHeader: { title: 'Review ' + locDetail.name },
+    title: 'Review ' + bookInfo.title + ' on Loc8r',
+    pageHeader: { title: 'Review ' + bookInfo.title },
     error: req.query.err
   });
 };
@@ -98,7 +98,7 @@ module.exports.doAddReview = function(req, res){
   bookid = req.params.bookid;
   path = "/api/books/" + bookid + '/reviews';
   postdata = {
-    author: req.body.name,
+    author: req.body.bookAuthor,
     rating: parseInt(req.body.rating, 10),
     reviewText: req.body.review
   };
