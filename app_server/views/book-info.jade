@@ -18,12 +18,12 @@ block content
             .panel-body
               each title in book.title 
                 | &nbsp;
+
         .col-xs-12.col-sm-6.book-map
-          .panel.panel-primary
-            .panel-heading
-              h2.panel-title book map
-            .panel-body
-             
+          //.panel.panel-primary
+            //.panel-heading
+              //h2.panel-title members with same favorite books
+            //.panel-body
       .row
         .col-xs-12
           .panel.panel-primary.review-panel
@@ -38,8 +38,8 @@ block content
                       span.rating
                         +outputRating(review.rating)
                       span.reviewAuthor #{review.author}
-                      small.reviewTimestamp
-                        #+formatDate(review.createdOn)
+                      small.reviewTimestamp 
+                        +formatDate(review.createdOn)
                     .col-xs-12
                       p !{(review.reviewText).replace(/\n/g, '<br/>')}
     .col-xs-12.col-md-3
