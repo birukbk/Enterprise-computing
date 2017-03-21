@@ -57,12 +57,94 @@ var getbookInfo = function (req, res, callback) {
     }
   );
 };
-/* GET Book info page */
-module.exports.bookInfo = function(req, res){
-  res.render('book-info', { title: 'Book Info' });
+
+var renderDetailPage = function (req, res, locDetail) {
+  res.render('book-info', {
+    title: locDetail.name,
+    pageHeader: {title: locDetail.name},
+    sidebar: {
+      context: 'is on Loc8r because it has accessible wifi and space to sit down with your laptop and get some work done.',
+      callToAction: 'If you\'ve been and you like it - or if you don\'t - please leave a review to help other people just like you.'
+    },
+    book: locDetail
+  });
 };
 
-/* GET Add review page */
-module.exports.addReview = function(req, res){
-  res.render('book-review-form', { title: 'Add Review' });
+/* GET 'book info' page */
+module.exports.bookInfo = function(req, res){
+  getbookInfo(req, res, function(req, res, responseData) {
+    renderDetailPage(req, res, responseData);
+  });
 };
+
+var renderReviewForm = function (req, res, locDetail) {
+  res.render('book-review-form', {
+    title: 'Review ' + locDetail.name + ' on Loc8r',
+    pageHeader: { title: 'Review ' + locDetail.name },
+    error: req.query.err
+  });
+};
+
+/* GET 'Add review' page */
+module.exports.addReview = function(req, res){
+  getbookInfo(req, res, function(req, res, responseData) {
+    renderReviewForm(req, res, responseData);
+  });
+};
+
+/* POST 'Add review' page */
+module.exports.doAddReview = function(req, res){
+  var requestOptions, path, bookid, postdata;
+  bookid = req.params.bookid;
+  path = "/api/books/" + bookid + '/reviews';
+  postdata = {
+    author: req.body.name,
+    rating: parseInt(req.body.rating, 10),
+    reviewText: req.body.review
+  };
+  requestOptions = {
+    url : apiOptions.server + path,
+    method : "POST",
+    json : postdata
+  };
+  if (!postdata.author || !postdata.rating || !postdata.reviewText) {
+    res.redirect('/book/' + bookid + '/reviews/new?err=val');
+  } else {
+    request(
+      requestOptions,
+      function(err, response, body) {
+        if (response.statusCode === 201) {
+          res.redirect('/book/' + bookid);
+        } else if (response.statusCode === 400 && body.name && body.name === "ValidationError" ) {
+          res.redirect('/book/' + bookid + '/reviews/new?err=val');
+        } else {
+          console.log(body);
+          _showError(req, res, response.statusCode);
+        }
+      }
+    );
+  }
+
+};
+
+var getbookInfo = function (req, res, callback) {
+  var requestOptions, path;
+  path = "/api/books/" + req.params.bookid;
+  requestOptions = {
+    url : apiOptions.server + path,
+    method : "GET",
+    json : {}
+  };
+  request(
+    requestOptions,
+    function(err, response, body) {
+      var data = body;
+      if (response.statusCode === 200) {
+        callback(req, res, data);
+      } else {
+        _showError(req, res, response.statusCode);
+      }
+    }
+  );
+};
+

@@ -5,7 +5,6 @@ var ctrlReviews = require('../controllers/reviews');
 
 //books
 router.get('/books', ctrlbooks.bookListByAuther);
-//router.get('/locations', ctrlbooks.locationsListByDistance);
 router.post('/books', ctrlbooks.booksCreate);
 router.get('/books/:bookid', ctrlbooks.booksReadOne);
 router.put('/books/:bookid', ctrlbooks.booksUpdateOne);
