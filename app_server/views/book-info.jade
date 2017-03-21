@@ -1,76 +1,47 @@
 extends layout
 
+include _includes/sharedHTMLfunctions
+
 block content
-  .row.page-header
-    .col-lg-12
-      h1 Zero to one
+  .row.page-header: .col-lg-12
+      h1= pageHeader.title
   .row
     .col-xs-12.col-md-9
       .row
         .col-xs-12.col-sm-6
-          p by Peter Thiel 
-          p.rating
-
-            span.glyphicon.glyphicon-star
-            span.glyphicon.glyphicon-star
-            span.glyphicon.glyphicon-star
-            span.glyphicon.glyphicon-star-empty
-            span.glyphicon.glyphicon-star-empty
-          
+         p.bookAuthor= book.bookAuthor  
+          p.rating 
+            +outputRating(book.rating)
           .panel.panel-primary
             .panel-heading
-              h2.panel-title Book Description
+              h2.panel-title Other titles
             .panel-body
-              p If you want to build a better future, you must believe in secrets.
-              p The great secret of our time is that there are still uncharted frontiers to explore and new
-              p inventions to create. In Zero to One , legendary entrepreneur and investor Peter Thiel shows how we p can find singular ways to create those new things. 
+              each title in book.title 
+                | &nbsp;
+        .col-xs-12.col-sm-6.book-map
           .panel.panel-primary
             .panel-heading
-              h2.panel-title Other books by same Author 
+              h2.panel-title book map
             .panel-body
-      
-              | &nbsp;
-        .col-xs-12.col-sm-6.books-image
-          .panel.panel-primary
-            .panel-heading
-              h2.panel-title books image
-            .panel-body
-              img.img-responsive.img-rounded(src='https://images-na.ssl-images-amazon.com/images/I/41puRJbtwkL._SX331_BO1,204,203,200_.jpg')
+             
       .row
         .col-xs-12
           .panel.panel-primary.review-panel
             .panel-heading
-              a.btn.btn-default.pull-right(href='/books/review/new') Add review
+              a.btn.btn-default.pull-right(href="/book/#{book._id}/review/new") Add review
               h2.panel-title Customer reviews
             .panel-body.review-container
-              .row
-                .review
-                  .well.well-sm.review-header
-                    span.rating
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                    span.reviewAuthor Simon Holmes
-                    small.reviewTimestamp 16 July 2013
-                  .col-xs-12
-                    p What a great place. I can't say enough good things about it.
-              .row
-                .review
-                  .well.well-sm.review-header
-                    span.rating
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star-empty
-                      span.glyphicon.glyphicon-star-empty
-                    span.reviewAuthor Charlie Chaplin
-                    small.reviewTimestamp 16 June 2013
-                  .col-xs-12
-                    p It was okay. Coffee wasn't great, but the wifi was fast.
+              each review in book.reviews
+                .row
+                  .review
+                    .well.well-sm.review-header
+                      span.rating
+                        +outputRating(review.rating)
+                      span.reviewAuthor #{review.author}
+                      small.reviewTimestamp
+                        #+formatDate(review.createdOn)
+                    .col-xs-12
+                      p !{(review.reviewText).replace(/\n/g, '<br/>')}
     .col-xs-12.col-md-3
-      p.lead
-        |"If you want to build a better future, you must believe in secrets."
-      p
-        | If you've read this book and you like it - or if you don't - please leave a review to help other people just like you.
+      p.lead #{book.name} #{sidebar.context}
+      p= sidebar.callToAction
