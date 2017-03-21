@@ -10,10 +10,6 @@ router.get('/book/:bookid', ctrlbooks.bookInfo);
 router.get('/book/:bookid/review/new', ctrlbooks.addReview);
 router.post('/book/:bookid/review/new', ctrlbooks.doAddReview);
 
-//router.get('/books', ctrlBook.bookInfo);
-//router.get('/books/review/new', ctrlBook.addReview);
-
-
 /* Other pages */
 router.get('/about', ctrlOthers.about);
 
