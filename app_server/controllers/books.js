@@ -79,7 +79,7 @@ module.exports.bookInfo = function(req, res){
 
 var renderReviewForm = function (req, res, bookInfo) {
   res.render('book-review-form', {
-    title: 'Review ' + bookInfo.title + ' on Loc8r',
+    title: 'Review ' + bookInfo.title + ' on BookFace',
     pageHeader: { title: 'Review ' + bookInfo.title },
     error: req.query.err
   });
@@ -98,7 +98,7 @@ module.exports.doAddReview = function(req, res){
   bookid = req.params.bookid;
   path = "/api/books/" + bookid + '/reviews';
   postdata = {
-    author: req.body.bookAuthor,
+    author: req.body.name,
     rating: parseInt(req.body.rating, 10),
     reviewText: req.body.review
   };
