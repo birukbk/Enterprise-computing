@@ -5,10 +5,8 @@ var sendJSONresponse = function(res,status,content){
 	res.json(content);
 };
 
-// module.exports.reviewsReadOne = function(req,res){
-// 	sendJsonResponse(res,200,{"status":"success"});
-// 	};
-// 	
+/* POST a new review, providing a bookid */
+/* /api/books/:bookid/reviews */
 module.exports.reviewsReadOne = function(req, res) {
   console.log("Getting single review");
   if (req.params && req.params.bookid && req.params.reviewid) {
@@ -58,8 +56,7 @@ module.exports.reviewsReadOne = function(req, res) {
   }
 };
 
-/* POST a new review, providing a bookid */
-/* /api/books/:bookid/reviews */
+
 module.exports.reviewsCreate = function(req, res) {
   if (req.params.bookid) {
     Bok
