@@ -49,19 +49,6 @@ module.exports.bookListByAuther = function(req, res) {
         });
 };
 
-var buildLBookList = function(req, res, results, stats) {
-    var books = [];
-    results.forEach(function(doc) {
-        books.push({
-            bookAuthor: doc.obj.bookAuthor,
-            title: doc.obj.title,
-            rating: doc.obj.rating,
-            _id: doc.obj._id
-        });
-    });
-    return books;
-};
-
 /* POST a new book */
 /* /api/books */
 module.exports.booksCreate = function(req, res) {

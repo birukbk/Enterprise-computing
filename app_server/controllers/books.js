@@ -70,6 +70,7 @@ var renderDetailPage = function(req, res, bookInfo) {
     });
 };
 
+
 /* GET 'book info' page */
 module.exports.bookInfo = function(req, res) {
     getbookInfo(req, res, function(req, res, responseData) {
