@@ -44,3 +44,5 @@ process.on('SIGTERM', function() {
 });
 
 require('./books');
+require('./users');
+
