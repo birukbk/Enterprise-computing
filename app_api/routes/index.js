@@ -16,5 +16,8 @@ router.put('/books/:bookid/reviews/:reviewid', ctrlReviews.reviewsUpdateOne);
 router.delete('/books/:bookid/reviews/:reviewid', ctrlReviews.reviewsDeleteOne);
 
 var ctrlAuth = require('../controllers/authentication');
+// authentication
+router.post('/register', ctrlAuth.register);
+router.post('/login', ctrlAuth.login);
 
 module.exports = router;
