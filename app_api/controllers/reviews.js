@@ -58,6 +58,7 @@ module.exports.reviewsReadOne = function(req, res) {
 
 
 module.exports.reviewsCreate = function(req, res) {
+    getAuthor(req, res, function (req, res, userName) {
     if (req.params.bookid) {
         Bok
             .findById(req.params.bookid)
@@ -76,15 +77,45 @@ module.exports.reviewsCreate = function(req, res) {
             "message": "Not found, bookid required"
         });
     }
+});
+};
+
+var getAuthor = function(req, res, callback) {
+  console.log("Finding author with email " + req.payload.email);
+  if (req.payload.email) {
+    User
+      .findOne({ email : req.payload.email })
+      .exec(function(err, user) {
+        if (!user) {
+          sendJSONresponse(res, 404, {
+            "message": "User not found"
+          });
+          return;
+        } else if (err) {
+          console.log(err);
+          sendJSONresponse(res, 404, err);
+          return;
+        }
+        console.log(user);
+        callback(req, res, user.name);
+      });
+
+  } else {
+    sendJSONresponse(res, 404, {
+      "message": "User not found"
+    });
+    return;
+  }
+
 };
 
 
-var doAddReview = function(req, res, book) {
+var doAddReview = function(req, res, book, author) {
     if (!book) {
         sendJSONresponse(res, 404, "bookid not found");
     } else {
         book.reviews.push({
-            author: req.body.author,
+            author: author,
             rating: req.body.rating,
             reviewText: req.body.reviewText
         });
