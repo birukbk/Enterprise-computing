@@ -15,4 +15,6 @@ router.get('/books/:bookid/reviews/:reviewid', ctrlReviews.reviewsReadOne);
 router.put('/books/:bookid/reviews/:reviewid', ctrlReviews.reviewsUpdateOne);
 router.delete('/books/:bookid/reviews/:reviewid', ctrlReviews.reviewsDeleteOne);
 
+var ctrlAuth = require('../controllers/authentication');
+
 module.exports = router;
