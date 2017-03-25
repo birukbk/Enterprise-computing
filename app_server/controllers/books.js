@@ -85,7 +85,9 @@ var renderReviewForm = function(req, res, bookInfo) {
     res.render('book-review-form', {
         title: 'Review ' + bookInfo.title + ' on BookFace',
         pageHeader: { title: 'Review ' + bookInfo.title },
-        error: req.query.err
+        error: req.query.err,
+        url: req.originalUrl
+
     });
 };
 

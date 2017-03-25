@@ -9,6 +9,7 @@ var ratingStars = function () {
   };
 };
 var bookListCtrl = function ($scope, bookData) {
+	$scope.message = "Fetching the list of books...";
 	bookData
 		.success(function(data){
 			$scope.data = { books : data};
