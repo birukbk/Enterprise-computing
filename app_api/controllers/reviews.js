@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var User = mongoose.model('User');
 var Bok = mongoose.model('Book');
 var sendJSONresponse = function(res, status, content) {
     res.status(status);
