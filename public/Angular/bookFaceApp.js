@@ -8,22 +8,22 @@ var ratingStars = function () {
     templateUrl: '/angular/rating-stars.html'
   };
 };
-var bookListCtrl = function ($scope) {
-	$scope.data = {
-		books :[{
-      title: 'Programming in Scala',
-      bookAuthor: 'Martin Odersky',
-      rating: 3,
-      _id: '5370a35f2536f6785f8dfb6a'
-    },{
-      title: '1984',
-      bookAuthor: 'George orwel',
-      rating: 5,
-      _id: '5370a35f2536f6785f8dfb6a'
-    }]};
+var bookListCtrl = function ($scope, bookData) {
+	bookData
+		.success(function(data){
+			$scope.data = { books : data};
+		})
+		.error(function(e){
+			console.log(e);
+		});
 };
+
+var bookData = function ($http) {
+	return $http.get('/api/books');
+  };
 
 angular
   .module('bookFaceApp')
   .directive('ratingStars', ratingStars)
+  .service('bookData', bookData)
   .controller('bookListCtrl', bookListCtrl);
