@@ -9,17 +9,16 @@ block content
         h1= pageHeader.title
          small &nbsp;#{pageHeader.strapline}
   .row
-    .col-xs-12.col-sm-8
+    .col-xs-12.col-sm-8(ng-controller="bookListCtrl")
+      .error {{ message }}
       .row.list-group
-        each book in books
-          .col-xs-12.list-group-item
-            h4 
-               +outputRating(book.rating)
-            h4
-              a(href="/book/#{book._id}")= book.title 
-              small &nbsp;
-              span.badge.pull-right.badge-default= book.comment
-            p.bookAuthor= book.bookAuthor      
+        .col-xs-12.list-group-item(ng-repeat="book in data.books")
+          h4 
+            a(href="/book/{{ book._id }}") {{ book.title }}
+            //small.rating-stars(rating-stars, rating="book.rating")
+            small {{ book.rating }}
+            //-   rating-stars(rating="book.rating")
+            span.badge.pull-right.badge-default {{ book.distance }}
+          p.bookAuthor {{ book.bookAuthor }}
     .col-xs-12.col-sm-4 
-
       p.lead= sidebar
