@@ -24,35 +24,20 @@ var _showError = function (req, res, status) {
   });
 };
 
-var renderHomepage = function(req, res, responseBody) {
+var renderHomepage = function(req, res) {
     res.render('books-list', {
         title: 'Welcome to your favorite books',
         pageHeader: {
             title: '',
             strapline: 'Welcome to your favorite books'
         },
-        sidebar: "Looking for something to read? BookFace helps you find books to read easly!",
-        books: responseBody
+        sidebar: "Looking for something to read? BookFace helps you find books to read easly!"
     });
 };
 
 /* GET 'home' page */
 module.exports.homelist = function(req, res) {
-    var requestOptions, path;
-    path = '/api/books';
-    requestOptions = {
-        url: apiOptions.server + path,
-        method: "GET",
-        json: {}
-    };
-    request(
-        requestOptions,
-        function(err, response, body) {
-            var data;
-            data = body;
-            renderHomepage(req, res, data);
-        }
-    );
+   renderHomepage(req, res);
 };
 
 var getbookInfo = function(req, res, callback) {
