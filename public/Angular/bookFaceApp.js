@@ -1,5 +1,13 @@
 angular.module('bookFaceApp',[]);
-
+var ratingStars = function () {
+  return {
+    scope: {
+      thisRating : '=rating'
+    },
+    // template : "{{ thisRating }}"
+    templateUrl: '/angular/rating-stars.html'
+  };
+};
 var bookListCtrl = function ($scope) {
 	$scope.data = {
 		books :[{
@@ -17,4 +25,5 @@ var bookListCtrl = function ($scope) {
 
 angular
   .module('bookFaceApp')
+  .directive('ratingStars', ratingStars)
   .controller('bookListCtrl', bookListCtrl);

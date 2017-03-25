@@ -15,8 +15,8 @@ block content
         .col-xs-12.list-group-item(ng-repeat="book in data.books")
           h4 
             a(href="/book/{{ book._id }}") {{ book.title }}
-            //small.rating-stars(rating-stars, rating="book.rating")
-            small {{ book.rating }}
+            small.rating-stars(rating-stars, rating="book.rating")
+            //small {{ book.rating }}
             //-   rating-stars(rating="book.rating")
             span.badge.pull-right.badge-default {{ book.distance }}
           p.bookAuthor {{ book.bookAuthor }}
