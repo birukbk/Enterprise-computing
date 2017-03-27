@@ -1,3 +1,4 @@
+(function () {
  angular.module('bookFaceApp', ['ngRoute']);
 
  function config ($routeProvider) {
@@ -13,3 +14,5 @@
   angular
     .module('bookFaceApp')
     .config(['$routeProvider', config]);
+
+})();

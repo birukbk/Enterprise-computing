@@ -1,4 +1,4 @@
-
+(function () {
 
   angular
     .module('bookFaceApp')
@@ -13,5 +13,5 @@
       templateUrl: '/common/directives/ratingStars/ratingStars.template.html'
     };
   }
-
+})();
 

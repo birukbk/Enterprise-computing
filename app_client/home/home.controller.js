@@ -1,3 +1,4 @@
+(function () {
 angular
     .module('bookFaceApp')
     .controller('homeCtrl', homeCtrl);
@@ -25,3 +26,5 @@ function homeCtrl($scope,bookFaceData) {
         });
     };
 }
+
+})();
