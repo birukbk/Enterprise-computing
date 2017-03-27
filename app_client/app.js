@@ -13,6 +13,11 @@
         controller: 'aboutCtrl',
         controllerAs: 'vm'
       })
+      .when('/book/:bookid', {
+        templateUrl: '/bookDetail/bookDetail.view.html',
+        controller: 'bookDetailCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({redirectTo: '/'});
       $locationProvider.html5Mode(true);
   }

@@ -11,7 +11,7 @@
       <div class="row list-group">
         <div class="col-xs-12 list-group-item" ng-repeat="book in vm.data.books | filter : textFilter">
           <h4>
-            <a href="#/book/{{ book._id }}">{{ book.title }}</a>
+            <a href="/#/book/{{ book._id }}">{{ book.title }}</a>
             <small class="rating-stars" rating-stars rating="book.rating"></small>
           </h4>
           <p class="address">{{ book.bookAuthor }}</p>
