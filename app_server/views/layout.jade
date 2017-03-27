@@ -21,7 +21,8 @@ html
               a(href='/about/') About
 
     .container
-      block content
+      div(ng-view)
+        block content
 
       footer
         .row
@@ -33,6 +34,7 @@ html
     script(src='/app.js')
     script(src='/javascripts/jquery-1.11.1.min.js')
     script(src='/bootstrap/js/bootstrap.min.js')
+    script(src='/home/home.controller.js')
 
     
     
