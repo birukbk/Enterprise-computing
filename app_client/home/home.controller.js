@@ -4,11 +4,12 @@ angular
 
   
   function homeCtrl ($scope) {
-    $scope.pageHeader = {
+    var vm = this;
+    vm.pageHeader = {
       title: 'bookFace',
       strapline: 'Welcome to your favorite books!'
     };
-     $scope.sidebar = {
+     vm.sidebar = {
       content: "Looking for something to read? BookFace helps you find books to read easly!"
     };
   }
