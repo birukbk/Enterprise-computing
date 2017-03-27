@@ -1,5 +1,5 @@
 (function () {
- angular.module('bookFaceApp', ['ngRoute']);
+ angular.module('bookFaceApp', ['ngRoute','ngSanitize']);
 
  function config ($routeProvider, $locationProvider) {
     $routeProvider
