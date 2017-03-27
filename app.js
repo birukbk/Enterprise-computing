@@ -28,7 +28,8 @@ var appClientFiles = [
   'app_client/app.js',
   'app_client/home/home.controller.js',
   'app_client/common/services/bookFaceData.service.js',
-  'app_client/common/directives/ratingStars/ratingStars.directive.js'
+  'app_client/common/directives/ratingStars/ratingStars.directive.js',
+  'app_client/common/directives/footerGeneric/footerGeneric.directive.js',
 ];
 var uglified = uglifyJs.minify(appClientFiles, { compress : false });
 
@@ -50,9 +51,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_client')));
 
 app.use(passport.initialize());
-app.use('/', routes);
+
+//app.use('/', routes);
 app.use('/api',routesApi);
 
+
+app.use(function(req, res) {
+  res.sendFile(path.join(__dirname, 'app_client', 'index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
