@@ -13,9 +13,10 @@ function homeCtrl($scope,bookFaceData) {
     vm.sidebar = {
         content: "Looking for something to read? BookFace helps you find books to read easly!"
     };
-        bookFaceData
+        bookFaceData.bookList()
             .success(function(data) {
                 vm.data = { books: data };
+                console.log(vm.data);
             })
             .error(function(e) {
                 vm.message = "Sorry, something's gone wrong";
