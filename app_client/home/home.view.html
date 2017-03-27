@@ -2,15 +2,14 @@
     <div class="row">
         <div class="col-lg-6"></div>
         <h1>
-        {{ vm.pageHeader.title }}
        <small>{{ vm.pageHeader.strapline }}</small>
       </h1>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-8">
-        <label for="filter">Filter results</label>
-        <input id="filter" type="text" , name="filter" , ng-model="textFilter">
+        <!-- <label for="filter">Filter results</label>
+        <input id="filter" type="text" , name="filter" , ng-model="textFilter"> -->
         <div class="error">{{ vm.message }}</div>
         <div class="row list-group">
             <div class="col-xs-12 list-group-item" ng-repeat="book in vm.data.books">
