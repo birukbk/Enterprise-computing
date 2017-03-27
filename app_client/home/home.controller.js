@@ -3,7 +3,7 @@ angular
     .module('bookFaceApp')
     .controller('homeCtrl', homeCtrl);
 
-
+homeCtrl.$inject = ['$scope', 'bookFaceData'];
 function homeCtrl($scope,bookFaceData) {
     var vm = this;
     vm.pageHeader = {
