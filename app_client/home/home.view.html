@@ -13,22 +13,12 @@
         <input id="filter" type="text" , name="filter" , ng-model="textFilter">
         <div class="error">{{ vm.message }}</div>
         <div class="row list-group">
-            <div class="col-xs-12 list-group-item" ng-repeat="book in
-vm.data.books | filter : textFilter">
+            <div class="col-xs-12 list-group-item" ng-repeat="book in vm.data.books">
                 <h4>
 <a href="/book/{{ book._id }}">{{ book.title }}</a>
-<small class="rating-stars" rating-stars
-rating="book.rating"></small>
-<span class="badge pull-right badge-default">{{ book.distance
-}}</span>
+<small class="rating-stars" rating-stars rating="book.rating"></small>
 </h4>
-                <p class="address">{{ book.bookAutor }}</p>
-                <p>
-                    <span class="label label-warning label-facility" ngrepeat="
-facility in book.facilities">
-{{ facility }}
-</span>
-                </p>
+                <p class="address">{{ book.bookAuthor }}</p>
             </div>
         </div>
     </div>
