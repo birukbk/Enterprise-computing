@@ -1,5 +1,5 @@
 (function() {
-    angular.module('bookFaceApp', ['ngRoute', 'ngSanitize']);
+    angular.module('bookFaceApp', ['ngRoute', 'ngSanitize','ui.bootstrap']);
 
     function config($routeProvider, $locationProvider) {
         $routeProvider

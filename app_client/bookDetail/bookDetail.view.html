@@ -2,6 +2,7 @@
 
 <div class="container">
   <page-header content="vm.pageHeader"></page-header>
+
   <div class="row">
     <div class="col-xs-12 col-md-9">
       <div class="row">
@@ -9,11 +10,15 @@
           <p class="rating" rating-stars rating="vm.data.book.rating"></p>
           <p>{{ vm.data.book.bookAuthor }}</p>
           <div class="panel panel-primary">
-          </div>
-          <div class="panel panel-primary">
-        </div>
-        <div class="col-xs-12 col-sm-6 book-map">
-          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h2 class="panel-title">similar</h2>
+            </div>
+            <div class="panel-body">
+              <span class="label label-warning label-facility" ng-repeat="facility in vm.data.book.facilities">
+                <span class="glyphicon glyphicon-ok"></span> 
+                {{ facility }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -42,8 +47,7 @@
       </div>
     </div>
     <div class="col-xs-12 col-md-3">
-      <p class="lead">{{ vm.data.book.title }} is on Loc8r because it has accessible wifi and space to sit down with your laptop and get some work done.</p>
-      <p>If you've been and you like it - or if you don't - please leave a review to help other people just like you.</p>
+      <p class="lead">{{ vm.data.book.title }} </p>
     </div>
   </div>
   <footer-generic></footer-generic>
