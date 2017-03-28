@@ -1,5 +1,5 @@
 (function() {
-    angular.module('bookFaceApp', ['ngRoute', 'ngSanitize','ui.bootstrap']);
+    angular.module('bookFaceApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
 
     function config($routeProvider, $locationProvider) {
         $routeProvider
@@ -16,6 +16,11 @@
             .when('/book/:bookid', {
                 templateUrl: '/bookDetail/bookDetail.view.html',
                 controller: 'bookDetailCtrl',
+                controllerAs: 'vm'
+            })
+            .when('/register', {
+                templateUrl: '/auth/register/register.view.html',
+                controller: 'registerCtrl',
                 controllerAs: 'vm'
             })
             .otherwise({ redirectTo: '/' });
