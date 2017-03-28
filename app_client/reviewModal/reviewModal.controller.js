@@ -3,9 +3,10 @@
         .module('bookFaceApp')
         .controller('reviewModalCtrl', reviewModalCtrl);
    
-    reviewModalCtrl.$inject = ['$modalInstance'];
-    function reviewModalCtrl($modalInstance) {
+    reviewModalCtrl.$inject = ['$modalInstance','bookData'];
+    function reviewModalCtrl($modalInstance,bookData) {
         var vm = this;
+        vm.bookData = bookData;
         vm.modal = {
             cancel: function() {
                 $modalInstance.dismiss('cancel');
