@@ -23,14 +23,17 @@
             var modalInstance = $modal.open({
                 templateUrl: '/reviewModal/reviewModal.view.html',
                 controller: 'reviewModalCtrl as vm',
-                resolve : {
-                bookData : function () {
-                    return {
-                        bookid : vm.bookid,
-                        bookTitle : vm.data.book.title
+                resolve: {
+                    bookData: function() {
+                        return {
+                            bookid: vm.bookid,
+                            bookTitle: vm.data.book.title
                         };
-                        }
-                        }
+                    }
+                }
+            });
+            modalInstance.result.then(function(data) {
+                vm.data.book.reviews.push(data);
             });
         };
     }
