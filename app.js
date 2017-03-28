@@ -28,6 +28,7 @@ var appClientFiles = [
   'app_client/app.js',
   'app_client/home/home.controller.js',
   'app_client/about/about.controller.js',
+  'app_client/auth/register/register.controller.js',
   'app_client/bookDetail/bookDetail.controller.js',
   'app_client/reviewModal/reviewModal.controller.js',
   'app_client/common/services/authentication.service.js',
