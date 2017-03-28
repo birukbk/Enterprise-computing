@@ -11,18 +11,33 @@
         var getToken = function() {
             return $window.localStorage['bookFace-token'];
         };
-        
-        register = function(user) {
-      return $http.post('/api/register', user).success(function(data){
-        saveToken(data.token);
-      });
-    };
 
-    login = function(user) {
-      return $http.post('/api/login', user).success(function(data) {
-        saveToken(data.token);
-      });
-    };
+        var isLoggedIn = function() {
+            var token = getToken();
+            if (token) {
+                var payload = JSON.parse($window.atob(token.split('.')[1]));
+                return payload.exp > Date.now() / 1000;
+            } else {
+                return false;
+            }
+        };
+
+        register = function(user) {
+            return $http.post('/api/register', user).success(function(data) {
+                saveToken(data.token);
+            });
+        };
+
+        login = function(user) {
+            return $http.post('/api/login', user).success(function(data) {
+                saveToken(data.token);
+            });
+        };
+
+        logout = function() {
+            $window.localStorage.removeItem('bookFace-token');
+        };
+
         return {
             saveToken: saveToken,
             getToken: getToken
