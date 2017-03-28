@@ -1,15 +1,15 @@
 (function () {
 
   angular
-    .module('loc8rApp')
+    .module('bookFaceApp')
     .controller('loginCtrl', loginCtrl);
 
-  loginCtrl.$inject = ['$location','authentication'];
-  function loginCtrl($location, authentication) {
+  loginCtrl.$inject = ['$book','authentication'];
+  function loginCtrl($book, authentication) {
     var vm = this;
 
     vm.pageHeader = {
-      title: 'Sign in to Loc8r'
+      title: 'Sign in to bookFace'
     };
 
     vm.credentials = {
@@ -17,7 +17,7 @@
       password : ""
     };
 
-    vm.returnPage = $location.search().page || '/';
+    vm.returnPage = $book.search().page || '/';
 
     vm.onSubmit = function () {
       vm.formError = "";
@@ -37,8 +37,8 @@
           vm.formError = err;
         })
         .then(function(){
-          $location.search('page', null); 
-          $location.path(vm.returnPage);
+          $book.search('page', null); 
+          $book.path(vm.returnPage);
         });
     };
 
