@@ -36,6 +36,7 @@ var appClientFiles = [
   'app_client/common/services/bookFaceData.service.js',
   'app_client/common/filters/addHtmlLineBreaks.filter.js',
   'app_client/common/directives/ratingStars/ratingStars.directive.js',
+  'app_client/common/directives/navigation/navigation.controller.js',
   'app_client/common/directives/navigation/navigation.directive.js',
   'app_client/common/directives/footerGeneric/footerGeneric.directive.js',
   'app_client/common/directives/pageHeader/pageHeader.directive.js'
