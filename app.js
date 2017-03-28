@@ -30,6 +30,7 @@ var appClientFiles = [
   'app_client/about/about.controller.js',
   'app_client/bookDetail/bookDetail.controller.js',
   'app_client/reviewModal/reviewModal.controller.js',
+  'app_client/common/services/authentication.service.js',
   'app_client/common/services/bookFaceData.service.js',
   'app_client/common/filters/addHtmlLineBreaks.filter.js',
   'app_client/common/directives/ratingStars/ratingStars.directive.js',
