@@ -1,20 +1,24 @@
 (function() {
-    angular
-        .module('bookFaceApp')
-        .service('bookFaceData', bookFaceData);
+        angular
+            .module('bookFaceApp')
+            .service('bookFaceData', bookFaceData);
 
-    bookFaceData.$inject = ['$http'];
+        bookFaceData.$inject = ['$http', 'authentication'];
 
-    function bookFaceData($http) {
-        var bookList = function() {
-            return $http.get('/api/books');
-        };
-        var bookById = function(bookid) {
-            return $http.get('/api/books/' + bookid);
-        };
+        function bookFaceData($http, authentication) {
+            var bookList = function() {
+                return $http.get('/api/books');
+            };
+            var bookById = function(bookid) {
+                return $http.get('/api/books/' + bookid);
+            };
 
-        var addReviewById = function(bookid, data) {
-            return $http.post('/api/books/' + bookid + '/reviews', data);
+            var addReviewById = function(bookid, data) {
+                return $http.post('/api/books/' + bookid + '/reviews', data, {
+                    headers: {
+                        Authorization: 'Bearer ' + authentication.getToken()
+                    }
+                });
         };
 
         return {
