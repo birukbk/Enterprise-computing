@@ -3,8 +3,6 @@
     .module('bookFaceApp')
     .service('bookFaceData', bookFaceData);
 
-   
-    
     bookFaceData.$inject = ['$http'];
     function bookFaceData ($http) {
     	var bookList = function () {

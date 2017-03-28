@@ -81,4 +81,5 @@ mongod
 *.sln
 #Environment variables
 .env
-public/angular/bookFace.min.js
+
+public/angular/
