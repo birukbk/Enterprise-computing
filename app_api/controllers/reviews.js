@@ -68,8 +68,9 @@ module.exports.reviewsCreate = function(req, res) {
                 function(err, book) {
                     if (err) {
                         sendJSONresponse(res, 400, err);
+
                     } else {
-                        doAddReview(req, res, book);
+                        doAddReview(req, res, book, userName);
                     }
                 }
             );
@@ -83,7 +84,7 @@ module.exports.reviewsCreate = function(req, res) {
 
 var getAuthor = function(req, res, callback) {
   console.log("Finding author with email " + req.payload.email);
-  if (req.payload.email) {
+  if (req.payload && req.payload.email) {
     User
       .findOne({ email : req.payload.email })
       .exec(function(err, user) {

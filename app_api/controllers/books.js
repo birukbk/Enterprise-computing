@@ -54,9 +54,9 @@ module.exports.bookListByAuther = function(req, res) {
 module.exports.booksCreate = function(req, res) {
     console.log(req.body);
     Bok.create({
-        title: req.body.title,
-        bookAuthor: req.body.bookAuthor,
-        rating: req.body.rating
+        title: req.query.title,
+        bookAuthor: req.query.bookAuthor,
+        rating: req.query.rating
     }, function(err, book) {
         if (err) {
             console.log(err);
