@@ -33,13 +33,15 @@
               <div class="row">
                 <div class="review" ng-repeat="review in vm.data.book.reviews | orderBy:'createdOn':true">
                   <div class="well well-sm review-header">
-                    <span class="rating" rating-stars rating="review.rating"></span>
+
                     <span class="reviewAuthor">{{ review.author }}</span>
+                    <span class="rating" rating-stars rating="review.rating"></span>
+                    
                     <small class="reviewTimestamp">{{ review.createdOn | date : 'd MMMM yyyy' }}</small>
+                    <br>
+                  <p ng-bind-html="review.reviewText | addHtmlLineBreaks"></p>
                   </div>
-                  <div class="col-xs-12">
-                    <p ng-bind-html="review.reviewText | addHtmlLineBreaks"></p>
-                  </div>
+                 
                 </div>
               </div>
             </div>
