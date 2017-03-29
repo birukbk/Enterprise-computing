@@ -1,57 +1,69 @@
-(function() {
-    angular
-        .module('bookFaceApp')
-        .service('authentication', authentication);
-    authentication.$inject = ['$window'];
+(function () {
 
-    function authentication($window) {
-        var saveToken = function(token) {
-            $window.localStorage['bookFace-token'] = token;
-        };
-        var getToken = function() {
-            return $window.localStorage['bookFace-token'];
-        };
+  angular
+    .module('bookFaceApp')
+    .service('authentication', authentication);
 
-        var isLoggedIn = function() {
-            var token = getToken();
-            if (token) {
-                var payload = JSON.parse($window.atob(token.split('.')[1]));
-                return payload.exp > Date.now() / 1000;
-            } else {
-                return false;
-            }
-        };
+  authentication.$inject = ['$http', '$window'];
+  function authentication ($http, $window) {
 
-        var currentUser = function() {
-            if (isLoggedIn()) {
-                var token = getToken();
-                var payload = JSON.parse($window.atob(token.split('.')[1]));
-                return {
-                    email: payload.email,
-                    name: payload.name
-                };
-            }
-        };
+    var saveToken = function (token) {
+      $window.localStorage['bookFace-token'] = token;
+    };
 
-        register = function(user) {
-            return $http.post('/api/register', user).success(function(data) {
-                saveToken(data.token);
-            });
-        };
+    var getToken = function () {
+      return $window.localStorage['bookFace-token'];
+    };
 
-        login = function(user) {
-            return $http.post('/api/login', user).success(function(data) {
-                saveToken(data.token);
-            });
-        };
+    var isLoggedIn = function() {
+      var token = getToken();
 
-        logout = function() {
-            $window.localStorage.removeItem('bookFace-token');
-        };
+      if(token){
+        var payload = JSON.parse($window.atob(token.split('.')[1]));
 
+        return payload.exp > Date.now() / 1000;
+      } else {
+        return false;
+      }
+    };
+
+    var currentUser = function() {
+      if(isLoggedIn()){
+        var token = getToken();
+        var payload = JSON.parse($window.atob(token.split('.')[1]));
         return {
-            saveToken: saveToken,
-            getToken: getToken
+          email : payload.email,
+          name : payload.name
         };
-    }
+      }
+    };
+
+    register = function(user) {
+      return $http.post('/api/register', user).success(function(data){
+        saveToken(data.token);
+      });
+    };
+
+    login = function(user) {
+      return $http.post('/api/login', user).success(function(data) {
+        saveToken(data.token);
+      });
+    };
+
+    logout = function() {
+      $window.localStorage.removeItem('bookFace-token');
+    };
+
+    return {
+      currentUser : currentUser,
+      saveToken : saveToken,
+      getToken : getToken,
+      isLoggedIn : isLoggedIn,
+      register : register,
+      login : login,
+      logout : logout
+    };
+  }
+
+
 })();
