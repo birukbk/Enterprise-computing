@@ -2,9 +2,9 @@
     angular
         .module('bookFaceApp')
         .controller('registerCtrl', registerCtrl);
-    registerCtrl.$inject = ['$book', 'authentication'];
+    registerCtrl.$inject = ['$location', 'authentication'];
 
-    function registerCtrl($book, authentication) {
+    function registerCtrl($location, authentication) {
         var vm = this;
         vm.pageHeader = {
             title: 'Create a new bookFace account'
@@ -14,7 +14,7 @@
             email: "",
             password: ""
         };
-        vm.returnPage = $book.search().page || '/';
+        vm.returnPage = $location.search().page || '/';
         vm.onSubmit = function() {
             vm.formError = "";
             if (!vm.credentials.name || !vm.credentials.email || !vm.credentials.password) {

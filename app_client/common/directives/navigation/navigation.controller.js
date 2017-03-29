@@ -4,11 +4,11 @@
     .module('bookFaceApp')
     .controller('navigationCtrl', navigationCtrl);
 
-  navigationCtrl.$inject = ['$book', 'authentication'];
-  function navigationCtrl($book, authentication) {
+  navigationCtrl.$inject = ['$location', 'authentication'];
+  function navigationCtrl($location, authentication) {
     var vm = this;
 
-    vm.currentPath = $book.path();
+    vm.currentPath = $location.path();
 
     vm.isLoggedIn = authentication.isLoggedIn();
 
@@ -16,7 +16,7 @@
 
     vm.logout = function() {
       authentication.logout();
-      $book.path('/');
+      $location.path('/');
     };
 
   }

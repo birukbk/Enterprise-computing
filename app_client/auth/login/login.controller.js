@@ -4,8 +4,8 @@
     .module('bookFaceApp')
     .controller('loginCtrl', loginCtrl);
 
-  loginCtrl.$inject = ['$book','authentication'];
-  function loginCtrl($book, authentication) {
+  loginCtrl.$inject = ['$location','authentication'];
+  function loginCtrl($location, authentication) {
     var vm = this;
 
     vm.pageHeader = {
@@ -17,7 +17,7 @@
       password : ""
     };
 
-    vm.returnPage = $book.search().page || '/';
+    vm.returnPage = $location.search().page || '/';
 
     vm.onSubmit = function () {
       vm.formError = "";
@@ -37,8 +37,8 @@
           vm.formError = err;
         })
         .then(function(){
-          $book.search('page', null); 
-          $book.path(vm.returnPage);
+          $location.search('page', null); 
+          $location.path(vm.returnPage);
         });
     };
 

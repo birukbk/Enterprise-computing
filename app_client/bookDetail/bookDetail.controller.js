@@ -3,11 +3,15 @@
         .module('bookFaceApp')
         .controller('bookDetailCtrl', bookDetailCtrl);
 
-    bookDetailCtrl.$inject = ['$routeParams', '$modal', 'bookFaceData'];
+    bookDetailCtrl.$inject = ['$routeParams','$location', '$modal', 'bookFaceData','authentication'];
 
-    function bookDetailCtrl($routeParams, $modal, bookFaceData) {
+    function bookDetailCtrl($routeParams,location, $modal, bookFaceData,authentication) {
         var vm = this;
         vm.bookid = $routeParams.bookid;
+        
+        vm.isLoggedIn = authentication.isLoggedIn();
+        //vm.currentPath = $location.path();
+        
         bookFaceData.bookById(vm.bookid)
             .success(function(data) {
                 vm.data = { book: data };
