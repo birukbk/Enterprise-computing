@@ -13,7 +13,7 @@
                 controller: 'aboutCtrl',
                 controllerAs: 'vm'
             })
-            .when('/book/:bookid', {
+            .when('/book/:bookid/titles/:titleid', {
                 templateUrl: '/bookDetail/bookDetail.view.html',
                 controller: 'bookDetailCtrl',
                 controllerAs: 'vm'
