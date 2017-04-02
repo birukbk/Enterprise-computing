@@ -8,15 +8,17 @@
     function bookDetailCtrl($routeParams,location, $modal, bookFaceData,authentication) {
         var vm = this;
         vm.bookid = $routeParams.bookid;
+        vm.titleid= $routeParams.titleid;
         
         vm.isLoggedIn = authentication.isLoggedIn();
         //vm.currentPath = $location.path();
         
-        bookFaceData.bookById(vm.bookid)
+        bookFaceData.titleById(vm.bookid,vm.titleid)
             .success(function(data) {
+
                 vm.data = { book: data };
                 vm.pageHeader = {
-                    title: vm.data.book.title
+                    title: vm.data.title
                 };
             })
             .error(function(e) {

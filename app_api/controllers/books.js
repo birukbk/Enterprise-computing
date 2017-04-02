@@ -33,6 +33,38 @@ module.exports.booksReadOne = function(req, res) {
     }
 };
 
+/* GET a book by the id */
+module.exports.titlesReadOne = function(req, res) {
+    var selectedTitle;
+    console.log('Finding title details', req.params);
+    if (req.params && req.params.bookid) {
+        Bok
+            .findById(req.params.bookid)
+            .select('titles')
+            .exec(function(err, book) {
+                if (!book) {
+                    sendJSONresponse(res, 404, {
+                        "message": "bookid not found"
+                    });
+                    return;
+                } else if (err) {
+                    console.log(err);
+                    sendJSONresponse(res, 404, err);
+                    return;
+                }
+                selectedTitle=book.titles.id(req.params.titleid);
+                console.log(selectedTitle);
+                sendJSONresponse(res, 200, selectedTitle);
+            });
+    } else {
+        console.log('No bookid specified');
+        sendJSONresponse(res, 404, {
+            "message": "No bookid in request"
+        });
+    }
+};
+
+
 /* GET list of books */
 module.exports.bookListByAuther = function(req, res) {
     console.log(req.body);
