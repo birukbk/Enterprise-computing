@@ -37,7 +37,7 @@ module.exports.booksReadOne = function(req, res) {
 module.exports.bookListByAuther = function(req, res) {
     console.log(req.body);
     Bok.find()
-        .select('bookAuthor title rating')
+        .select('bookAuthor titles')
         .exec(function(err, book) {
             if (err) {
                 console.log(err);

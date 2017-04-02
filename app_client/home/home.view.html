@@ -9,14 +9,19 @@
       <input id="filter" type="text", name="filter", ng-model="textFilter"> -->
       <div class="error">{{ vm.message }}</div>
       <div class="row list-group">
-        <div class="col-xs-12 list-group-item" ng-repeat="book in vm.data.books | filter : textFilter">
-          <h4>
-            <a href="/#/book/{{ book._id }}">{{ book.title }}</a>
-            <small class="rating-stars" rating-stars rating="book.rating"></small>
-          </h4>
-          <p class="address">{{ book.bookAuthor }}</p>
+            <div class="col-xs-12 list-group-item" ng-repeat="book in vm.data.books | filter : textFilter">
+                <h4>
+                    {{book.bookAuthor}}
+                </h4>
+                <div ng-repeat="eachbook in book.titles">
+                    <ul>
+                        <li>
+                            <a href="/#/book/{{ book._id }}/titles/{{ titles._id }}">{{eachbook.title}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <div class="col-xs-12 col-sm-4">
       <p class="lead">{{ vm.sidebar.content }}</p>

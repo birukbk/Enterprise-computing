@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+
+
 var reviewSchema = new mongoose.Schema({
     author: {
         type: String,
@@ -17,21 +19,28 @@ var reviewSchema = new mongoose.Schema({
     }
 });
 
-var bookSchema = new mongoose.Schema({
+var titleSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
     },
+    favouredBy: {
+        type:[String],
+        required: false
+    },
+    reviews: [reviewSchema]
+   
+});
+
+
+
+var bookSchema = new mongoose.Schema({
     bookAuthor: {
         type: String,
         required: true
     },
-    rating: {
-        type: Number,
-        "default": 0,
-        min: 0,
-        max: 5
-    },
-    reviews: [reviewSchema]
+    titles: [titleSchema]
 });
 mongoose.model('Book', bookSchema);
+
+

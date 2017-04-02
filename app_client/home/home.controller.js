@@ -15,7 +15,7 @@ function homeCtrl($scope,bookFaceData) {
     };
         bookFaceData.bookList()
             .success(function(data) {
-                vm.data = { books: data };
+                vm.data = { books: data};
                 console.log(vm.data);
             })
             .error(function(e) {
