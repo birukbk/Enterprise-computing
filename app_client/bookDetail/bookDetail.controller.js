@@ -25,6 +25,8 @@
                 console.log(e);
             });
 
+            
+
         vm.popupReviewForm = function() {
             var modalInstance = $modal.open({
                 templateUrl: '/reviewModal/reviewModal.view.html',
