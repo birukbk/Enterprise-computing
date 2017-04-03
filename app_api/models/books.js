@@ -20,6 +20,10 @@ var reviewSchema = new mongoose.Schema({
 });
 
 var titleSchema = new mongoose.Schema({
+    author: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true

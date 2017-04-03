@@ -7,7 +7,7 @@ homeCtrl.$inject = ['$scope', 'bookFaceData'];
 function homeCtrl($scope,bookFaceData) {
     var vm = this;
     vm.pageHeader = {
-        title: 'bookFace',
+        title: '',
         strapline: 'Welcome to your favorite books!'
     };
     vm.sidebar = {
