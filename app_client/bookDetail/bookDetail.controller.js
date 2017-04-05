@@ -43,6 +43,7 @@
             });
             modalInstance.result.then(function(data) {
                 vm.data.book.reviews.push(data);
+                location.reload();
             });
         };
     }

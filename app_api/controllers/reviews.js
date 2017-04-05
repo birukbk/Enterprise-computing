@@ -59,6 +59,7 @@ module.exports.reviewsReadOne = function(req, res) {
 
 
 module.exports.reviewsCreate = function(req, res) {
+getAuthor(req, res, function (req, res, userName) {
     if (req.params.bookid) {
         Bok
             .findById(req.params.bookid)
@@ -68,7 +69,7 @@ module.exports.reviewsCreate = function(req, res) {
                     if (err) {
                         sendJSONresponse(res, 400, err);
                     } else {
-                        doAddReview(req, res, book);
+                        doAddReview(req, res, book, userName);
                     }
                 }
             );
@@ -77,6 +78,7 @@ module.exports.reviewsCreate = function(req, res) {
             "message": "Not found, bookid required"
         });
     }
+});
 
 };
 
@@ -101,8 +103,8 @@ var doAddReview = function(req, res, book, author) {
             if (err) {
                 sendJSONresponse(res, 400, err);
             } else {
-                updateAverageRating(book._id);
-                thisReview = book.reviews[book.reviews.length - 1];
+                // updateAverageRating(book._id);
+                // thisReview = book.reviews[book.reviews.length - 1];
                 sendJSONresponse(res, 201, book);
             }
         });

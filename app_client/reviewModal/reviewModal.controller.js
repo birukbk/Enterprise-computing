@@ -39,6 +39,7 @@
         vm.modal = {
             close: function(result) {
                 $modalInstance.close(result);
+                location.reload();
             },
             cancel: function() {
                 $modalInstance.dismiss('cancel');
