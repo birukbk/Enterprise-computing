@@ -59,18 +59,16 @@ module.exports.reviewsReadOne = function(req, res) {
 
 
 module.exports.reviewsCreate = function(req, res) {
-    getAuthor(req, res, function (req, res, userName) {
     if (req.params.bookid) {
         Bok
             .findById(req.params.bookid)
-            .select('reviews')
+            .select('titles')
             .exec(
                 function(err, book) {
                     if (err) {
                         sendJSONresponse(res, 400, err);
-
                     } else {
-                        doAddReview(req, res, book, userName);
+                        doAddReview(req, res, book);
                     }
                 }
             );
@@ -79,9 +77,37 @@ module.exports.reviewsCreate = function(req, res) {
             "message": "Not found, bookid required"
         });
     }
-});
+
 };
 
+
+
+var doAddReview = function(req, res, book, author) {
+    var thisReview;
+    //console.log(book);
+    if (!book) {
+        sendJSONresponse(res, 404, "bookid not found");
+    } else {
+        thisReview = book.titles.id(req.params.titleid);
+        console.log(thisReview);
+        thisReview.reviews.push({
+           author: req.query.author,
+           rating: req.query.rating,
+           reviewText: req.query.reviewText
+
+        });
+        book.save(function(err, book) {
+            var thisReview;
+            if (err) {
+                sendJSONresponse(res, 400, err);
+            } else {
+                updateAverageRating(book._id);
+                //thisReview = book.reviews[book.reviews.length - 1];
+                sendJSONresponse(res, 201, book);
+            }
+        });
+    }
+};
 var getAuthor = function(req, res, callback) {
   console.log("Finding author with email " + req.payload.email);
   if (req.payload && req.payload.email) {
@@ -109,29 +135,6 @@ var getAuthor = function(req, res, callback) {
     return;
   }
 
-};
-
-
-var doAddReview = function(req, res, book, author) {
-    if (!book) {
-        sendJSONresponse(res, 404, "bookid not found");
-    } else {
-        book.reviews.push({
-            author: author,
-            rating: req.body.rating,
-            reviewText: req.body.reviewText
-        });
-        book.save(function(err, book) {
-            var thisReview;
-            if (err) {
-                sendJSONresponse(res, 400, err);
-            } else {
-                updateAverageRating(book._id);
-                thisReview = book.reviews[book.reviews.length - 1];
-                sendJSONresponse(res, 201, thisReview);
-            }
-        });
-    }
 };
 
 var updateAverageRating = function(bookid) {

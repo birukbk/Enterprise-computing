@@ -18,7 +18,7 @@ router.get('/books/:bookid/titles/:titleid', ctrlbooks.titlesReadOne);
 router.put('/books/:bookid', ctrlbooks.booksUpdateOne);
 router.delete('/books/:bookid', ctrlbooks.booksDeleteOne);
 // reviews
-router.post('/books/:bookid/reviews', auth, ctrlReviews.reviewsCreate);
+router.post('/books/:bookid/titles/:titleid/reviews',auth,ctrlReviews.reviewsCreate);
 router.get('/books/:bookid/reviews/:reviewid', ctrlReviews.reviewsReadOne);
 router.put('/books/:bookid/reviews/:reviewid', auth,  ctrlReviews.reviewsUpdateOne);
 router.delete('/books/:bookid/reviews/:reviewid', auth,ctrlReviews.reviewsDeleteOne);
