@@ -1,10 +1,7 @@
 var request = require('request');
 var apiOptions = {
-    server: "http://localhost:3000"
+    server: "https://hidden-hollows-18954.herokuapp.com"
 };
-if (process.env.NODE_ENV === 'production') {
-    apiOptions.server = "https://hidden-hollows-18954.herokuapp.com";
-}
 var _showError = function (req, res, status) {
   var title, content;
   if (status === 404) {
