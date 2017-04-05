@@ -17,8 +17,8 @@
                 return $http.get('/api/books/' + bookid + '/titles/' + titleid);
             };
 
-            var addReviewById = function(bookid, data) {
-                return $http.post('/api/books/' + bookid + '/reviews', data, {
+            var addReviewById = function(bookid,titleid, data) {
+                return $http.post('/api/books/' + bookid + '/titles/' + titleid +'/reviews', data, {
                     headers: {
                         Authorization: 'Bearer ' + authentication.getToken()
                     }

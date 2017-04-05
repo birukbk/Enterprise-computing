@@ -35,6 +35,7 @@
                     bookData: function() {
                         return {
                             bookid: vm.bookid,
+                            titleid: vm.titleid,
                             bookTitle: vm.data.book.title
                         };
                     }

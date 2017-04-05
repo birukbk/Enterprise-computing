@@ -10,17 +10,20 @@
         vm.bookData = bookData;
 
         vm.onSubmit = function() {
+
+          
             vm.formError = "";
             if (!vm.formData.rating || !vm.formData.reviewText) {
                 vm.formError = "All fields required, please try again";
                 return false;
             } else {
-                vm.doAddReview(vm.bookData.bookid, vm.formData);
+                vm.doAddReview(vm.bookData.bookid,vm.bookData.titleid, vm.formData);
             }
         };
 
-        vm.doAddReview = function(bookid, formData) {
-            bookFaceData.addReviewById(bookid, {
+        vm.doAddReview = function(bookid, titleid, formData) {
+            console.log(formData);
+            bookFaceData.addReviewById(bookid,titleid, {
                     rating: formData.rating,
                     reviewText: formData.reviewText
                 })

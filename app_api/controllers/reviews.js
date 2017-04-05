@@ -91,9 +91,9 @@ var doAddReview = function(req, res, book, author) {
         thisReview = book.titles.id(req.params.titleid);
         console.log(thisReview);
         thisReview.reviews.push({
-           author: req.query.author,
-           rating: req.query.rating,
-           reviewText: req.query.reviewText
+           author: author,
+           rating: req.body.rating,
+           reviewText: req.body.reviewText
 
         });
         book.save(function(err, book) {
@@ -102,7 +102,7 @@ var doAddReview = function(req, res, book, author) {
                 sendJSONresponse(res, 400, err);
             } else {
                 updateAverageRating(book._id);
-                //thisReview = book.reviews[book.reviews.length - 1];
+                thisReview = book.reviews[book.reviews.length - 1];
                 sendJSONresponse(res, 201, book);
             }
         });
