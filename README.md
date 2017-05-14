@@ -1,6 +1,7 @@
 # Enterprise-computing
 Enterprise computing, coursework 3 BookFace
-
+Note:Before running the application
+ -> Use JWT_SECRET=thisIsSecret for setting up .env file.
 Overview
 
 This coursework covers the development of an enterprise level application using a Javascript based framework (or similar technology). The coursework is designed to give students hands on experience with building enterprise applications. Furthermore, all the technologies used are production grade, giving students the experience and knowledge they need to build a real enterprise application. 
