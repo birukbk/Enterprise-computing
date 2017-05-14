@@ -1,4 +1,4 @@
-Note:Before running the application
+Note:Before running the application<br />
 -> Use JWT_SECRET=thisIsSecret for setting up .env file.<br />
 -> You can use the sample data that is included.(SampleDatabase.md)<br />
 
