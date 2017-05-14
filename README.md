@@ -1,5 +1,5 @@
-#Note:Before running the application
-#-> Use JWT_SECRET=thisIsSecret for setting up .env file.
+Note:Before running the application
+-> Use JWT_SECRET=thisIsSecret for setting up .env file.
 
 # Enterprise-computing
 Enterprise computing, coursework 3 BookFace
